@@ -86,7 +86,7 @@ export default function Navbar() {
                 display={{ base: "flex", md: "none" }}
                 aria-label="Open menu"
                 fontSize="20px"
-                color={useColorModeValue("gray.800", "inherit")}
+                color={"gray.800"}
                 variant="ghost"
                 icon={<AiOutlineMenu />}
                 onClick={mobileNav.onOpen}
@@ -111,21 +111,14 @@ export default function Navbar() {
                   onClick={mobileNav.onClose}
                 />
 
-                <Button w="full" variant="ghost">
-                  Features
+                <Button onClick={()=>{navigate('/')}} w="full" variant="ghost">
+                  Home
                 </Button>
-                <Button w="full" variant="ghost">
-                  Pricing
+                <Button onClick={()=>{navigate('/dashboard')}} w="full" variant="ghost">
+                  Dashboard
                 </Button>
-                <Button w="full" variant="ghost">
-                  Blog
-                </Button>
-                <Button w="full" variant="ghost">
-                  Company
-                </Button>
-                <Button w="full" variant="ghost">
-                  Sign in
-                </Button>
+                <RegisterModal/>
+
               </VStack>
             </Box>
           </HStack>
