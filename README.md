@@ -1,4 +1,4 @@
-# Storydots-frontend
+# Storydots Challenge Frotend
 
 - [Intro](#intro)
 - [Librerias](#libreries)
