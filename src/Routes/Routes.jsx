@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Home from "../views/pages/Home";
-import Dashboard from "../views/dashboard/dashboard";
+import Dashboard from "../views/dashboard/Dashboard";
 function DashboardRoutes() {
 
 
