@@ -21,7 +21,10 @@ import {
   useDisclosure,
   Flex,
   Box,
+  Text,
 } from "@chakra-ui/react";
+import TextField from "../field/TextField";
+import TextAreaField from "../field/TextAreaField";
 
 function ProductAdd(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,6 +45,7 @@ function ProductAdd(props) {
   const close = () => {
     setMessage(initialState);
     onClose();
+    
   };
 
   const onSubmit = async (values) => {
@@ -74,11 +78,11 @@ function ProductAdd(props) {
     brand: 0,
   };
   const validationSchema = Yup.object({
-    name: Yup.string().required(),
-    description: Yup.string().required(),
-    image: Yup.string().required(),
-    price: Yup.number().required(),
-    brand: Yup.number().required(),
+    name: Yup.string().required("El nombre no puede ser vacio"),
+    description: Yup.string().required("La descripcion no puede estar vacia"),
+    image: Yup.string().required("La imagen no puede ser vacia "),
+    price: Yup.number().required("El precio no puede ser vacio"),
+    brand: Yup.number().required("Falta seleccionar una marca"),
   });
 
   return (
@@ -93,10 +97,10 @@ function ProductAdd(props) {
         onClick={onOpen}
         ml={2}
       >
-        PUBLICAR PRODUCTO NUEVO
+        PUBLICAR PRODUCTO
       </RippledButton>
 
-      <Modal isOpen={isOpen} onClose={close}>
+      <Modal isOpen={isOpen} onClose={close} isCentered>
         <ModalOverlay />
         <ModalContent>
           {pending ? (
@@ -119,19 +123,37 @@ function ProductAdd(props) {
                       alignContent={"center"}
                       m={6}
                     >
-                      PUBLICAR PRODUCTO NUEVO
+                      <Text fontSize="2xl" fontWeight={"bold"}>
+                        PUBLICAR PRODUCTO
+                      </Text>
                     </Box>
-                    <InputControl name="name" label="Nombre" />
-                    <TextareaControl
-                      name="description"
-                      label="Descripcion"
-                      mt={3}
+                    <TextField
+                      name="name"
+                      label={"Nombre"}
+                      placeholder="BAGUETTES"
+                      type="text"
                     />
-                    <InputControl name="image" label="Imagen" mt={3} />
-                    <InputControl name="price" label="Precio" mt={3} />
+                    <TextAreaField
+                      name="description"
+                      label={"Descripcion"}
+                      placeholder="Estesettraeunsandwichtotalmentedesarmablenotraeabrojostiene"
+                    />
+                    <TextField
+                      name="image"
+                      label={"Imagen"}
+                      placeholder="https://d3ugyf2ht6aenh.cloudfront.net/stores/771/622/products/lachi-junio-y-julio-8144_1-d38011a323fa47c30516237120310019-1024-1024.jpg"
+                      type="text"
+                    />
+                    <TextField
+                      name="price"
+                      label={"Precio"}
+                      placeholder="775.30"
+                      type="number"
+                    />
                     <SelectControl
                       name="brand"
-                      selectProps={{ placeholder: "Select option" }}
+                      selectProps={{ placeholder: "Seleccione marca" }}
+                      mt={3}
                     >
                       {data.content.map((brand) => {
                         return (

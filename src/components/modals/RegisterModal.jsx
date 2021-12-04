@@ -19,7 +19,8 @@ import {
   Text,
   Button,
 } from "@chakra-ui/react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import TextField from "../field/TextField";
 
 function RegisterModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -34,8 +35,8 @@ function RegisterModal() {
   const onSubmit = async (values) => {
     try {
       const response = await api.singUp({
-        email: values.Email,
-        pass: values.Contrasena,
+        email: values.email,
+        pass: values.pass,
       });
       setMessage({
         title: "Felicitaciones tu cuenta fue creada.",
@@ -50,12 +51,16 @@ function RegisterModal() {
   };
 
   const initialValues = {
-    Email: "",
-    Contrasena: "",
+    email: "",
+    pass: "",
   };
   const validationSchema = Yup.object({
-    Email: Yup.string().required().email(),
-    Contrasena: Yup.string().required(),
+    email: Yup.string()
+      .required("Por favor escriba un mail")
+      .email("Ingresa un mail"),
+    pass: Yup.string()
+      .required("Por favor escriba una contraseña")
+      .min(5, "La contraseña es demasiado corta"),
   });
 
   return (
@@ -73,7 +78,7 @@ function RegisterModal() {
         TRY IT FREE
       </RippledButton>
 
-      <Modal isOpen={isOpen} onClose={close}>
+      <Modal isOpen={isOpen} onClose={close} isCentered>
         <ModalOverlay />
         <ModalContent>
           {message.title !== "" ? (
@@ -104,12 +109,20 @@ function RegisterModal() {
                         alt="Logo story"
                       />
                     </Box>
-                    <InputControl name="Email" label="Email" />
-                    <InputControl
-                      name="Contrasena"
-                      label="Tu contrasena"
+
+                    <TextField
+                      name="email"
+                      label={"Email"}
+                      placeholder="UsuarioPrueba@gmail.com"
+                      type="email"
+                    />
+
+                    <TextField
+                      name="pass"
+                      label={"Password"}
+                      type="password"
+                      placeholder="StoryDots"
                       mt={3}
-                      type={"password"}
                     />
 
                     <SubmitButton colorScheme="primary" mt={5} w={"100%"}>
@@ -123,7 +136,14 @@ function RegisterModal() {
                     >
                       <Flex alignItems="center">
                         <Text>Ya estas registrado? </Text>
-                        <Button onClick={()=>{navigate('/dashboard')}} colorScheme="primary" size="sm" variant="ghost">
+                        <Button
+                          onClick={() => {
+                            navigate("/dashboard");
+                          }}
+                          colorScheme="primary"
+                          size="sm"
+                          variant="ghost"
+                        >
                           Inicia tu sesion
                         </Button>
                       </Flex>

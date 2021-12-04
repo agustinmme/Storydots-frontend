@@ -4,12 +4,7 @@ import RippledButton from "../button/RippledButton";
 import api from "../../services/api-nodejs";
 import MsgBox from "../message/MsgBox";
 import { Formik } from "formik";
-import {
-  InputControl,
-  SubmitButton,
-  ResetButton,
-  TextareaControl,
-} from "formik-chakra-ui";
+import { SubmitButton, ResetButton } from "formik-chakra-ui";
 import {
   Modal,
   ModalOverlay,
@@ -18,8 +13,10 @@ import {
   ModalCloseButton,
   useDisclosure,
   Flex,
-  Box,
+  Box,Text
 } from "@chakra-ui/react";
+import TextField from "../field/TextField";
+import TextAreaField from "../field/TextAreaField";
 
 function ProductUpdate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -61,10 +58,10 @@ function ProductUpdate(props) {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required(),
-    description: Yup.string().required(),
-    image: Yup.string().required(),
-    price: Yup.number().required(),
+    name: Yup.string().required("El nombre no puede ser vacio"),
+    description: Yup.string().required("La descripcion no puede estar vacia"),
+    image: Yup.string().required("La imagen no puede ser vacia "),
+    price: Yup.number().required("El precio no puede ser vacio"),
   });
 
   return (
@@ -82,7 +79,7 @@ function ProductUpdate(props) {
         ACTUALIZAR
       </RippledButton>
 
-      <Modal isOpen={isOpen} onClose={close}>
+      <Modal isOpen={isOpen} onClose={close} isCentered>
         <ModalOverlay />
         <ModalContent>
           {message.title !== "" ? (
@@ -103,20 +100,34 @@ function ProductUpdate(props) {
                       alignContent={"center"}
                       m={6}
                     >
-                      MODIFICAR PRODUCTO
+                      <Text fontSize="2xl" fontWeight={"bold"}>
+                        MODIFICAR PRODUCTO
+                      </Text>
                     </Box>
-                    <InputControl
+                    <TextField
                       name="name"
-                      label="Nombre"
-                      Props={{ placeholder: "MAIL" }}
+                      label={"Nombre"}
+                      placeholder="BAGUETTES"
+                      type="text"
                     />
-                    <TextareaControl
+                    <TextAreaField
                       name="description"
-                      label="Descripcion"
-                      mt={3}
+                      label={"Descripcion"}
+                      placeholder="Estesettraeunsandwichtotalmentedesarmablenotraeabrojostiene"
                     />
-                    <InputControl name="image" label="Imagen" mt={3} />
-                    <InputControl name="price" label="Precio" mt={3} />
+                    <TextField
+                      name="image"
+                      label={"Imagen"}
+                      placeholder="https://d3ugyf2ht6aenh.cloudfront.net/stores/771/622/products/lachi-junio-y-julio-8144_1-d38011a323fa47c30516237120310019-1024-1024.jpg"
+                      type="text"
+                    />
+                    <TextField
+                      name="price"
+                      label={"Precio"}
+                      placeholder="775.30"
+                      type="number"
+                    />
+
                     <Flex justifyContent="space-between">
                       <SubmitButton colorScheme="primary" w={"30%"} mt={5}>
                         Aceptar

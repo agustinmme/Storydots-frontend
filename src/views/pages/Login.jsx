@@ -5,23 +5,24 @@ import { InputControl, SubmitButton } from "formik-chakra-ui";
 import logo from "../../assets/storydots-footer.svg";
 import * as Yup from "yup";
 import api from "../../services/api-nodejs";
-import MsgBox from '../../components/message/MsgBox'
-const Login = ({passToken}) => {
+import MsgBox from "../../components/message/MsgBox";
+import TextField from "../../components/field/TextField";
+const Login = ({ passToken }) => {
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
   const onSubmit = async (values) => {
     try {
       const response = await api.singIn({
-        email: values.Email,
-        pass: values.Contrasena,
+        email: values.email,
+        pass: values.pass,
       });
-      passToken(response.token)
+      passToken(response.token);
     } catch (error) {
-      console.log(error)
-    setMessage({
-      title: error.response.statusText,
-      text: error.response.data.message,
-    });
+      console.log(error);
+      setMessage({
+        title: error.response.statusText,
+        text: error.response.data.message,
+      });
       setTimeout(() => {
         setMessage(initialState);
       }, 2500);
@@ -29,12 +30,17 @@ const Login = ({passToken}) => {
   };
 
   const initialValues = {
-    Email: "",
-    Contrasena: "",
+    email: "",
+    pass: "",
   };
   const validationSchema = Yup.object({
-    Email: Yup.string().required().email(),
-    Contrasena: Yup.string().required(),
+    email: Yup.string()
+      .required("Por favor escriba un mail")
+      .email("Ingresa un mail"),
+      pass: Yup.string().required("Por favor escriba una contraseña").min(
+      5,
+      "La contraseña es demasiado corta"
+    ),
   });
   return (
     <Box bgGradient={"linear(to-r, primary.200, secondary.600)"}>
@@ -58,10 +64,7 @@ const Login = ({passToken}) => {
                 onSubmit={handleSubmit}
               >
                 {message.title !== "" ? (
-                  <MsgBox
-                    title={message.title}
-                    text={message.text}
-                  />
+                  <MsgBox title={message.title} text={message.text} />
                 ) : (
                   <Box
                     display={"d-flex"}
@@ -84,8 +87,21 @@ const Login = ({passToken}) => {
                     </Text>
                   </Box>
                 )}
-                <InputControl name="Email" label="Email" />
-                <InputControl name="Contrasena" label="Tu contrasena" mt={3} />
+
+                <TextField
+                  name="email"
+                  label={"Email"}
+                  placeholder="UsuarioPrueba@gmail.com"
+                  type="email"
+                />
+
+                <TextField
+                  name="pass"
+                  label={"Password"}
+                  type="password"
+                  placeholder="StoryDots"
+                  mt={3}
+                />
 
                 <SubmitButton
                   colorScheme="primary"

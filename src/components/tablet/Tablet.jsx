@@ -3,14 +3,7 @@ import ProductModal from "../modals/ProductModal";
 import ProductUpdate from "../modals/ProductUpdate";
 import ProductDelete from "../modals/ProductDelete";
 import ProductAdd from "../modals/ProductAdd";
-import {
-  chakra,
-  Flex,
-  Text,
-  Stack,
-  SimpleGrid,
-} from "@chakra-ui/react";
-
+import { chakra, Flex, Text, Stack, SimpleGrid } from "@chakra-ui/react";
 
 export default function Tablet({ data, token }) {
   return (

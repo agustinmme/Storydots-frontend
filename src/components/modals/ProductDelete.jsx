@@ -12,6 +12,7 @@ import {
   Button,
   Text,
   Box,
+  chakra
 } from "@chakra-ui/react";
 
 function ProductDelete(props) {
@@ -22,6 +23,7 @@ function ProductDelete(props) {
   const close = () => {
     setMessage(initialState);
     onClose();
+    
   };
 
   const onDelete = async () => {
@@ -31,6 +33,7 @@ function ProductDelete(props) {
         title: "Felicitaciones tu producto fue eliminado.",
         text: response.message,
       });
+      
     } catch (error) {
       setMessage({
         title: error.response.statusText,
@@ -54,23 +57,30 @@ function ProductDelete(props) {
         ELIMINAR
       </RippledButton>
 
-      <Modal isOpen={isOpen} onClose={close}>
+      <Modal isOpen={isOpen} onClose={close} isCentered>
         <ModalOverlay />
         <ModalContent>
           {message.title !== "" ? (
             <MsgBox title={message.title} text={message.text} close={close} />
           ) : (
-            <ModalBody>
+            <ModalBody p={6}>
               <Box
                 display={"d-flex"}
                 justifyContent={"center"}
                 alignContent={"center"}
                 m={6}
               >
-                Eliminar
+                <Text fontSize="2xl" fontWeight={"bold"}>
+                  Eliminar
+                </Text>
               </Box>
               <Text>
-                Estas seguro de querer Eliminar al producto {props.name}{" "}
+                Estas seguro de querer{" "}
+                <chakra.span textColor={"red"} fontWeight={"bold"}>
+                  Eliminar
+                </chakra.span>{" "}
+                al producto{" "}
+                <chakra.span fontWeight={"bold"}>{props.name}</chakra.span>{" "}
               </Text>
               <Flex justifyContent="space-between" mt={10}>
                 <Button
