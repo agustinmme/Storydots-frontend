@@ -19,12 +19,13 @@ import {
   Text,
   Button,
 } from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom';
 
 function RegisterModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
-
+  const navigate = useNavigate();
   const close = () => {
     setMessage(initialState);
     onClose();
@@ -122,7 +123,7 @@ function RegisterModal() {
                     >
                       <Flex alignItems="center">
                         <Text>Ya estas registrado? </Text>
-                        <Button colorScheme="primary" size="sm" variant="ghost">
+                        <Button onClick={()=>{navigate('/dashboard')}} colorScheme="primary" size="sm" variant="ghost">
                           Inicia tu sesion
                         </Button>
                       </Flex>
