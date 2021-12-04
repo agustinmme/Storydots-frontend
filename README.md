@@ -50,6 +50,7 @@ Por este motivo se paso a utilizar Heroku como host backend y Vercel como front.
 - Agregrar redux o context.
 - Agregar roles de usuarios o eliminar seccion de registro.
 - Agregar Localstorage.
+- Agregar Cypress o Jest/React-testing-librery.
 - Cambiar algunos console.logs por Alertas.
 - Investigar patrones, organización y estructuras de directorio react/node.
 
