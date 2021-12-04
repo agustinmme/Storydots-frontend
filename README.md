@@ -16,7 +16,7 @@
 Bienvenido a la documentacion del challenge de StoryDots - Fronted.
 Se trata de una app fullstack con React.js y NodeJS para realizar las
 operaciones CRUD de productos con algunos extras como añadir una autenticación y unos endpoint de brands.
-
+- [Ir al backend](https://github.com/agustinmme/Storydots-backend)
 
 ## Libreries
 
@@ -56,6 +56,10 @@ Por este motivo se paso a utilizar Heroku como host backend y Vercel como front.
 - Investigar patrones, organización y estructuras de directorio react/node.
 
 \* Algunos de estos puntos no se aplicaron por falta de tiempo.
+
+## Backend 
+
+[Ir al backend](https://github.com/agustinmme/Storydots-backend)
 
 ## ¿Necesitas ayuda? 
 
