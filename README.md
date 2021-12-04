@@ -1,7 +1,5 @@
 # Storydots-frontend
 
-## StoryDots Challenge
-
 - [Intro](#intro)
 - [Librerias](#libreries)
 - [Quick Start](#quick-start)
