@@ -5,7 +5,7 @@ import RippledButton from "../button/RippledButton";
 import api from "../../services/api-nodejs";
 import MsgBox from "../message/MsgBox";
 import { Formik } from "formik";
-import { InputControl, SubmitButton } from "formik-chakra-ui";
+import { SubmitButton } from "formik-chakra-ui";
 import {
   Modal,
   ModalOverlay,

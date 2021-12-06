@@ -6,10 +6,8 @@ import SpinnerCustom from "../spinner/Spinner";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import {
-  InputControl,
   SubmitButton,
   ResetButton,
-  TextareaControl,
   SelectControl,
 } from "formik-chakra-ui";
 import {

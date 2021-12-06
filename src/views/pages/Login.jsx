@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Container, Image, Text, Flex } from "@chakra-ui/react";
 import { Formik } from "formik";
-import { InputControl, SubmitButton } from "formik-chakra-ui";
+import {  SubmitButton } from "formik-chakra-ui";
 import logo from "../../assets/storydots-footer.svg";
 import * as Yup from "yup";
 import api from "../../services/api-nodejs";
