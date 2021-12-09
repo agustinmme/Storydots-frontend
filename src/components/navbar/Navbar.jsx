@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoMdArrowRoundForward } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const mobileNav = useDisclosure();
@@ -26,7 +26,7 @@ export default function Navbar() {
     <React.Fragment>
       <chakra.header
         bgGradient={"linear(to-r, primary.200, secondary.600)"}
-        w="full"
+        w={"full"}
         px={{ base: 4, sm: 14 }}
         pt={10}
         pb={6}
@@ -60,11 +60,7 @@ export default function Navbar() {
               color="brand.500"
               display={{ base: "none", md: "inline-flex" }}
             >
-              <RippledButton
-                bgColor={"transparent"}
-              >
-                HOME
-              </RippledButton>
+              <RippledButton bgColor={"transparent"}>HOME</RippledButton>
               <RippledButton
                 rightIcon={<IoMdArrowRoundForward />}
                 border={"1px solid"}
@@ -74,11 +70,13 @@ export default function Navbar() {
                 step2={"700"}
                 step3={"800"}
                 size={"md"}
-                onClick={()=>{navigate('/dashboard')}}
+                onClick={() => {
+                  navigate("/dashboard");
+                }}
               >
                 DASHBOARD
               </RippledButton>
-              <RegisterModal/>
+              <RegisterModal />
             </HStack>
 
             <Box display={{ base: "inline-flex", md: "none" }}>
@@ -86,7 +84,7 @@ export default function Navbar() {
                 display={{ base: "flex", md: "none" }}
                 aria-label="Open menu"
                 fontSize="20px"
-                color={"gray.800"}
+                color={"white"}
                 variant="ghost"
                 icon={<AiOutlineMenu />}
                 onClick={mobileNav.onOpen}
@@ -105,20 +103,35 @@ export default function Navbar() {
                 spacing={3}
                 rounded="sm"
                 shadow="sm"
+                zIndex={"1"}
               >
                 <CloseButton
                   aria-label="Close menu"
+                  color={"white"}
                   onClick={mobileNav.onClose}
                 />
 
-                <Button onClick={()=>{navigate('/')}} w="full" variant="ghost">
-                  Home
-                </Button>
-                <Button onClick={()=>{navigate('/dashboard')}} w="full" variant="ghost">
-                  Dashboard
-                </Button>
-                <RegisterModal/>
+                <RippledButton
+                  bgColor={"transparent"}
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                  w={"full"}
+                >
+                  HOME
+                </RippledButton>
 
+                <RippledButton
+                  bgColor={"transparent"}
+                  onClick={() => {
+                    navigate("/dashboard");
+                  }}
+                  w={"full"}
+                >
+                  DASHBOARD
+                </RippledButton>
+
+                <RegisterModal />
               </VStack>
             </Box>
           </HStack>

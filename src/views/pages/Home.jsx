@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { SimpleGrid, Container, Text, Box } from "@chakra-ui/react";
+
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import Carousel from "../../components/carousel/Carousel";
 import ProductCard from "../../components/cards/ProductCard";
-import { SimpleGrid, Container, Text, Box } from "@chakra-ui/react";
 import Pagination from "../../components/pagination/Pagination";
 import api from "../../services/api-nodejs";
 import SpinnerCustom from "../../components/spinner/Spinner";
+import { isEmpty } from "../../../utils/utils";
+
 function App() {
   const [pending, setPending] = useState(true);
   const [data, setData] = useState({});
   const [page, setPage] = useState(0);
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -35,6 +39,7 @@ function App() {
       console.log(error);
     }
   };
+  
   const nextPage = async () => {
     try {
       setPending(true);
@@ -92,12 +97,12 @@ function App() {
             )
           )}
         </SimpleGrid>
-        <Pagination
+        {isEmpty(data)?null:<Pagination
           data={data}
           page={page}
           prevPage={prevPage}
           nextPage={nextPage}
-        />
+        />}
       </Container>
       <Footer />
     </Box>

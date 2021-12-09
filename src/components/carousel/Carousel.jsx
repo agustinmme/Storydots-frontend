@@ -46,18 +46,20 @@ export default function Carousel() {
       w="full"
       alignItems="center"
       justifyContent="center"
-      display={{ base: "none", md: "block" }}
+     
+
     >
       <Flex w="full" overflow="hidden">
         <Flex
           pos="relative"
-          h={{ base: "none", md: "500px" }}
+          h={{ base: "200px", md: "500px" }}
           w="full"
+          zIndex={"0"}
           {...carouselStyle}
         >
           {slides.map((slide, sid) => (
             <Box key={`slide-${sid}`} flex="none" boxSize="full" shadow="md">
-              <Image src={slide.img} boxSize="full" backgroundSize="cover" />
+              <Image  src={slide.img} h={{ base: "200px", md: "500px" }}  w={"full"}  objectFit='cover' objectPosition={{base:"20%",md:"none"}} />
             </Box>
           ))}
         </Flex>

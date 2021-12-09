@@ -23,9 +23,9 @@ export default function Pagination({data,page,prevPage,nextPage}) {
             boxSize={6}
             onClick={prevPage}
           />
-          <Text cursor={"pointer"} _hover={{color:"secondary.600"}}>{page+1}</Text>
-          <Text>OF</Text>
-          <Text cursor={"pointer"} _hover={{color:"secondary.600"}} >{data.totalPages || 1}</Text>
+          <Text cursor={"default"} _hover={{color:"secondary.600"}}>{page+1 }</Text>
+          <Text cursor={"default"} _hover={{color:"secondary.600"}}>OF</Text>
+          <Text cursor={"default"} _hover={{color:"secondary.600"}} >{data.totalPages || 1}</Text>
           <IconButton
             variant="ghost"
             colorScheme="secondary"

@@ -6,11 +6,13 @@ import Pagination from "../../components/pagination/Pagination";
 import api from "../../services/api-nodejs";
 import SpinnerCustom from "../../components/spinner/Spinner";
 import PanelButtons from "../../components/button/PanelButtons";
+import { isEmpty } from "../../../utils/utils";
 
 function HomeDashboard({ token }) {
   const [data, setData] = useState({});
   const [pending, setPending] = useState(true);
   const [page, setPage] = useState(0);
+  
   const Products = async () => {
     try {
       setPending(true);
@@ -21,6 +23,7 @@ function HomeDashboard({ token }) {
       console.log(error);
     }
   };
+
   const prevPage = async () => {
     try {
       setPending(true);
@@ -32,6 +35,7 @@ function HomeDashboard({ token }) {
       console.log(error);
     }
   };
+
   const nextPage = async () => {
     try {
       setPending(true);
@@ -43,6 +47,7 @@ function HomeDashboard({ token }) {
       console.log(error);
     }
   };
+
   return (
     <Box maxW="6xl" mx={"auto"} p={5} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1
@@ -61,7 +66,7 @@ function HomeDashboard({ token }) {
         />
         <PanelButtons title={"Marcas"} />
       </SimpleGrid>
-      {Object.entries(data).length === 0 ? null : pending ? (
+      {isEmpty(data) ? null : pending ? (
         <SpinnerCustom />
       ) : (
         <Stack>
