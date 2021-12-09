@@ -70,7 +70,7 @@ function HomeDashboard({ token }) {
         <SpinnerCustom />
       ) : (
         <Stack>
-          <Tablet data={data.content} token={token}/>
+          <Tablet data={data.content} token={token} Products={Products}/>
           <Pagination
             data={data}
             page={page}

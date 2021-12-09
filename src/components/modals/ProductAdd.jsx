@@ -60,6 +60,7 @@ function ProductAdd(props) {
         title: "Felicitaciones tu producto fue agregado con exito.",
         text: response.message,
       });
+      props.Products();
     } catch (error) {
       setMessage({
         title: error.response.statusText,

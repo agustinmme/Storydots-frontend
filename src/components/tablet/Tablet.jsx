@@ -5,10 +5,10 @@ import ProductDelete from "../modals/ProductDelete";
 import ProductAdd from "../modals/ProductAdd";
 import { chakra, Flex, Text, Stack, SimpleGrid } from "@chakra-ui/react";
 
-export default function Tablet({ data, token }) {
+export default function Tablet({ data, token,Products }) {
   return (
     <Stack mt={24}>
-      <ProductAdd token={token} />
+      <ProductAdd token={token} Products={Products}/>
       <Flex w="full" alignItems="center" justifyContent="center">
         <Stack direction={{ base: "column" }} w="full" spacing={5}>
           {data.map((product) => {
@@ -53,11 +53,13 @@ export default function Tablet({ data, token }) {
                       price={product.price}
                       id={product.id}
                       token={token}
+                      Products={Products}
                     />
                     <ProductDelete
                       name={product.name}
                       id={product.id}
                       token={token}
+                      Products={Products}
                     />
                   </Flex>
                 </SimpleGrid>

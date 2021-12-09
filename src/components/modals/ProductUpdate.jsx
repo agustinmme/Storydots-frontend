@@ -42,6 +42,7 @@ function ProductUpdate(props) {
         title: "Felicitaciones tu producto fue actulizado.",
         text: response.message,
       });
+      props.Products();
     } catch (error) {
       setMessage({
         title: error.response.statusText,

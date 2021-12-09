@@ -23,7 +23,6 @@ function ProductDelete(props) {
   const close = () => {
     setMessage(initialState);
     onClose();
-    
   };
 
   const onDelete = async () => {
@@ -33,7 +32,7 @@ function ProductDelete(props) {
         title: "Felicitaciones tu producto fue eliminado.",
         text: response.message,
       });
-      
+      props.Products();
     } catch (error) {
       setMessage({
         title: error.response.statusText,
