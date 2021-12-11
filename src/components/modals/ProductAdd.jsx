@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import RippledButton from "../button/RippledButton";
 import api from "../../services/api-nodejs";
 import MsgBox from "../message/MsgBox";
@@ -29,7 +29,9 @@ function ProductAdd(props) {
   const [data, setData] = useState({});
   const [pending, setPending] = useState(true);
 
-  useEffect(async () => {
+
+  const open = async () => {
+    onOpen();
     try {
       const response = await api.getAllBrands();
       setData(response);
@@ -37,7 +39,10 @@ function ProductAdd(props) {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
+
+
+
   const close = () => {
     setMessage(initialState);
     onClose();
@@ -90,7 +95,7 @@ function ProductAdd(props) {
         step2={"600"}
         step3={"700"}
         size={"lg"}
-        onClick={onOpen}
+        onClick={open}
         ml={2}
       >
         PUBLICAR PRODUCTO

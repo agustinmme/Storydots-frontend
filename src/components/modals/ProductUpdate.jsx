@@ -20,11 +20,28 @@ import {
   Input,
 } from "@chakra-ui/react";
 import FieldChakra from "../field/FieldChakra";
+import SpinnerCustom from "../spinner/Spinner";
 
 function ProductUpdate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialState = { title: "", text: "" };
+  const [data, setData] = useState({});
+  const [pending, setPending] = useState(true);
   const [message, setMessage] = useState(initialState);
+
+
+
+  const open = async () => {
+    onOpen();
+    try {
+      const response = await api.getAllBrands();
+        setData(response);
+        setPending(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const close = () => {
     setMessage(initialState);
@@ -34,11 +51,12 @@ function ProductUpdate(props) {
   const onSubmit = async (values) => {
     try {
       const response = await api.updateProduct({
+        id: props.id,
         name: values.name,
         description: values.description,
         image_url: values.image,
         price: values.price,
-        id: props.id,
+        brandId: values.brand,
         token: props.token,
       });
       setMessage({
@@ -58,7 +76,8 @@ function ProductUpdate(props) {
     name: props.name,
     description: props.description,
     image: props.image,
-    price: parseInt(props.price),
+    price: props.price,
+    brand: props.brand,
   };
 
   const validationSchema = Yup.object({
@@ -77,7 +96,7 @@ function ProductUpdate(props) {
         step2={"600"}
         step3={"700"}
         size={"md"}
-        onClick={onOpen}
+        onClick={open}
         ml={2}
       >
         ACTUALIZAR
@@ -86,7 +105,9 @@ function ProductUpdate(props) {
       <Modal isOpen={isOpen} onClose={close} isCentered>
         <ModalOverlay />
         <ModalContent>
-          {message.title !== "" ? (
+          {pending ? (
+            <SpinnerCustom />
+          ) : message.title !== "" ? (
             <MsgBox title={message.title} text={message.text} close={close} />
           ) : (
             <ModalBody>
@@ -135,7 +156,21 @@ function ProductUpdate(props) {
                       placeholder="775.30"
                       type="number"
                     />
-
+                    <FieldChakra
+                      placeholder="Seleccionar"
+                      label={"Marca"}
+                      chakraComp={Select}
+                      name="brand"
+                      mt={3}
+                    >
+                      {data.content.map((brand) => {
+                        return (
+                          <option key={brand.id} value={brand.id}>
+                            {brand.name}
+                          </option>
+                        );
+                      })}
+                    </FieldChakra>
                     <Flex justifyContent="space-between">
                       <Button
                         isLoading={isSubmitting}
