@@ -7,7 +7,7 @@ import Carousel from "../../components/carousel/Carousel";
 import ProductCard from "../../components/cards/ProductCard";
 import Pagination from "../../components/pagination/Pagination";
 import api from "../../services/api-nodejs";
-import SpinnerCustom from "../../components/spinner/Spinner";
+import CustomSpinner from "../../components/spinner/Spinner";
 import { isEmpty } from "../../../utils/utils";
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
       console.log(error);
     }
   };
-  
+
   const nextPage = async () => {
     try {
       setPending(true);
@@ -81,7 +81,7 @@ function App() {
           spacing={2}
         >
           {pending ? (
-            <SpinnerCustom />
+            <CustomSpinner />
           ) : (
             data.content.map(
               ({ id, name, description, image_url, price, brand }) => (
@@ -97,12 +97,14 @@ function App() {
             )
           )}
         </SimpleGrid>
-        {isEmpty(data)?null:<Pagination
-          data={data}
-          page={page}
-          prevPage={prevPage}
-          nextPage={nextPage}
-        />}
+        {isEmpty(data) ? null : (
+          <Pagination
+            data={data}
+            page={page}
+            prevPage={prevPage}
+            nextPage={nextPage}
+          />
+        )}
       </Container>
       <Footer />
     </Box>
