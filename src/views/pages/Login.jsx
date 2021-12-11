@@ -1,15 +1,31 @@
 import React, { useState } from "react";
-import { Box, Container, Image, Text, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Image,
+  Text,
+  Flex,
+  Button,
+  Input,
+  InputRightElement,
+  InputGroup,
+  IconButton,
+} from "@chakra-ui/react";
 import { Formik } from "formik";
-import {  SubmitButton } from "formik-chakra-ui";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import logo from "../../assets/storydots-footer.svg";
 import * as Yup from "yup";
 import api from "../../services/api-nodejs";
 import MsgBox from "../../components/message/MsgBox";
-import TextField from "../../components/field/TextField";
+import FieldChakra from "../../components/field/FieldChakra";
+
 const Login = ({ passToken }) => {
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
+
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+
   const onSubmit = async (values) => {
     try {
       const response = await api.singIn({
@@ -37,10 +53,9 @@ const Login = ({ passToken }) => {
     email: Yup.string()
       .required("Por favor escriba un mail")
       .email("Ingresa un mail"),
-      pass: Yup.string().required("Por favor escriba una contraseña").min(
-      5,
-      "La contraseña es demasiado corta"
-    ),
+    pass: Yup.string()
+      .required("Por favor escriba una contraseña")
+      .min(5, "La contraseña es demasiado corta"),
   });
   return (
     <Box bgGradient={"linear(to-r, primary.200, secondary.600)"}>
@@ -51,7 +66,7 @@ const Login = ({ passToken }) => {
             onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
-            {({ handleSubmit }) => (
+            {({ handleSubmit, isSubmitting }) => (
               <Box
                 borderWidth="1px"
                 rounded="lg"
@@ -88,28 +103,41 @@ const Login = ({ passToken }) => {
                   </Box>
                 )}
 
-                <TextField
+                <FieldChakra
                   name="email"
                   label={"Email"}
+                  chakraComp={Input}
                   placeholder="UsuarioPrueba@gmail.com"
                   type="email"
                 />
 
-                <TextField
-                  name="pass"
-                  label={"Password"}
-                  type="password"
-                  placeholder="StoryDots"
-                  mt={3}
-                />
+                <InputGroup mt={1} size="md">
+                  <FieldChakra
+                    name="pass"
+                    label={"Password"}
+                    chakraComp={Input}
+                    type={show ? "text" : "password"}
+                    placeholder="StoryDots"
+                  />
+                  <InputRightElement>
+                    <IconButton
+                      size="sm"
+                      onClick={handleClick}
+                      aria-label="Ver contraseña"
+                      icon={show ? <AiFillEyeInvisible /> : <AiFillEye />}
+                    />
+                  </InputRightElement>
+                </InputGroup>
 
-                <SubmitButton
+                <Button
+                  isLoading={isSubmitting}
                   colorScheme="primary"
-                  mt={{ base: 5, md: 10 }}
                   w={"100%"}
+                  mt={5}
+                  type="sumbit"
                 >
                   Iniciar sesión
-                </SubmitButton>
+                </Button>
               </Box>
             )}
           </Formik>

@@ -4,7 +4,6 @@ import RippledButton from "../button/RippledButton";
 import api from "../../services/api-nodejs";
 import MsgBox from "../message/MsgBox";
 import { Formik } from "formik";
-import { SubmitButton, ResetButton } from "formik-chakra-ui";
 import {
   Modal,
   ModalOverlay,
@@ -13,10 +12,14 @@ import {
   ModalCloseButton,
   useDisclosure,
   Flex,
-  Box,Text
+  Box,
+  Text,
+  Button,
+  Select,
+  Textarea,
+  Input,
 } from "@chakra-ui/react";
-import TextField from "../field/TextField";
-import TextAreaField from "../field/TextAreaField";
+import FieldChakra from "../field/FieldChakra";
 
 function ProductUpdate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -93,7 +96,7 @@ function ProductUpdate(props) {
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
               >
-                {({ handleSubmit }) => (
+                {({ handleSubmit, isSubmitting, resetForm }) => (
                   <Box maxWidth={800} as="form" onSubmit={handleSubmit} p={3}>
                     <Box
                       display={"d-flex"}
@@ -105,42 +108,54 @@ function ProductUpdate(props) {
                         MODIFICAR PRODUCTO
                       </Text>
                     </Box>
-                    <TextField
+                    <FieldChakra
                       name="name"
                       label={"Nombre"}
+                      chakraComp={Input}
                       placeholder="BAGUETTES"
                       type="text"
                     />
-                    <TextAreaField
+                    <FieldChakra
                       name="description"
                       label={"Descripcion"}
+                      chakraComp={Textarea}
                       placeholder="Estesettraeunsandwichtotalmentedesarmablenotraeabrojostiene"
                     />
-                    <TextField
+                    <FieldChakra
                       name="image"
                       label={"Imagen"}
+                      chakraComp={Input}
                       placeholder="https://d3ugyf2ht6aenh.cloudfront.net/stores/771/622/products/lachi-junio-y-julio-8144_1-d38011a323fa47c30516237120310019-1024-1024.jpg"
                       type="text"
                     />
-                    <TextField
+                    <FieldChakra
                       name="price"
                       label={"Precio"}
+                      chakraComp={Input}
                       placeholder="775.30"
                       type="number"
                     />
 
                     <Flex justifyContent="space-between">
-                      <SubmitButton colorScheme="primary" w={"30%"} mt={5}>
+                      <Button
+                        isLoading={isSubmitting}
+                        type={"sumbit"}
+                        colorScheme="primary"
+                        w={"30%"}
+                        mt={5}
+                      >
                         Aceptar
-                      </SubmitButton>
-                      <ResetButton
+                      </Button>
+
+                      <Button
                         variant={"ghost"}
                         colorScheme="secondary"
                         w={"30%"}
                         mt={5}
+                        onClick={resetForm}
                       >
                         Cancelar
-                      </ResetButton>
+                      </Button>
                     </Flex>
                   </Box>
                 )}

@@ -5,7 +5,7 @@ import RippledButton from "../button/RippledButton";
 import api from "../../services/api-nodejs";
 import MsgBox from "../message/MsgBox";
 import { Formik } from "formik";
-import { SubmitButton } from "formik-chakra-ui";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import {
   Modal,
   ModalOverlay,
@@ -18,15 +18,23 @@ import {
   Box,
   Text,
   Button,
+  Input,
+  IconButton,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import TextField from "../field/TextField";
+import FieldChakra from "../field/FieldChakra";
 
 function RegisterModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => setShow(!show);
+
   const close = () => {
     setMessage(initialState);
     onClose();
@@ -91,7 +99,7 @@ function RegisterModal() {
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
               >
-                {({ handleSubmit }) => (
+                {({ handleSubmit, isSubmitting }) => (
                   <Box maxWidth={800} as="form" onSubmit={handleSubmit}>
                     <Box
                       display={"d-flex"}
@@ -110,24 +118,42 @@ function RegisterModal() {
                       />
                     </Box>
 
-                    <TextField
+                    <FieldChakra
                       name="email"
                       label={"Email"}
+                      chakraComp={Input}
                       placeholder="UsuarioPrueba@gmail.com"
                       type="email"
                     />
 
-                    <TextField
-                      name="pass"
-                      label={"Password"}
-                      type="password"
-                      placeholder="StoryDots"
-                      mt={3}
-                    />
 
-                    <SubmitButton colorScheme="primary" mt={5} w={"100%"}>
+                    <InputGroup mt={1} size="md">
+                      <FieldChakra
+                        name="pass"
+                        label={"Password"}
+                        chakraComp={Input}
+                        type={show ? "text" : "password"}
+                        placeholder="StoryDots"
+                      />
+                      <InputRightElement>
+                        <IconButton
+                          size="sm"
+                          onClick={handleClick}
+                          aria-label="Ver contraseña"
+                          icon={show ? <AiFillEyeInvisible /> : <AiFillEye />}
+                        />
+                      </InputRightElement>
+                    </InputGroup>
+
+                    <Button
+                      isLoading={isSubmitting}
+                      type={"sumbit"}
+                      colorScheme="primary"
+                      w={"100%"}
+                      mt={5}
+                    >
                       Registar
-                    </SubmitButton>
+                    </Button>
                     <Box
                       display={"d-flex"}
                       justifyContent="center"

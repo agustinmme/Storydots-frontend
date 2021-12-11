@@ -3,18 +3,17 @@ import {
     FormErrorMessage,
     FormLabel,
   } from "@chakra-ui/form-control";
-  import { Input } from "@chakra-ui/input";
   import { Field, useField } from "formik";
   
-  const TextField = ({ label, ...props }) => {
+  const FieldChakra = ({ label,chakraComp, ...props }) => {
     const [field, meta] = useField(props);
     return (
       <FormControl isInvalid={meta.error && meta.touched}>
         <FormLabel mt={3}>{label}</FormLabel>
-        <Field as={Input} {...field} {...props} />
+        <Field as={chakraComp} {...field} {...props} />
         <FormErrorMessage>{meta.error}</FormErrorMessage>
       </FormControl>
     );
   };
   
-  export default TextField;
+  export default FieldChakra;
