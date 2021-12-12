@@ -14,7 +14,7 @@ function Brand({ id, name, image, reload }) {
     >
       <SimpleGrid
         spacingY={5}
-        columns={{ base: 1, md: 3 }}
+        columns={{ base: 1, md: 2 }}
         w="full"
         py={3}
         px={10}
@@ -29,8 +29,7 @@ function Brand({ id, name, image, reload }) {
             image={image}
             text={"VER"}
           />
-          <BrandUpdate id={id} name={name} image={image} reload={reload}/>
-          <BrandDelete id={id} name={name}  reload={reload} />
+          <BrandDelete id={id} name={name} reload={reload} />
         </Flex>
       </SimpleGrid>
     </Flex>
