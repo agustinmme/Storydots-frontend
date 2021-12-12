@@ -34,7 +34,7 @@ function ProductAdd(props) {
   const open = async () => {
     onOpen();
     try {
-      const response = await api.getAllBrands();
+      const response = await api.getNoPageBrand();
       setData(response);
       setPending(false);
     } catch (error) {

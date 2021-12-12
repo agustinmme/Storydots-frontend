@@ -5,7 +5,7 @@ import ProductDelete from "../modals/Product/ProductDelete";
 import { chakra, Flex, Text, Stack, SimpleGrid } from "@chakra-ui/react";
 
 
-function Product({id,name,description,image,price,brand,reloadData}) {
+function Product({id,name,description,image,price,brand,reload}) {
     return (
         <Flex
         direction={{ base: "row", md: "column" }}
@@ -46,12 +46,12 @@ function Product({id,name,description,image,price,brand,reloadData}) {
               price={price}
               id={id}
               brand={brand.id}
-              reload={reloadData}
+              reload={reload}
             />
             <ProductDelete
               name={name}
               id={id}
-              reload={reloadData}
+              reload={reload}
             />
           </Flex>
         </SimpleGrid>
