@@ -21,6 +21,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import FieldChakra from "../field/FieldChakra";
+import { getTokenLocal } from "../../../utils/auth";
 
 function ProductAdd(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -56,13 +57,13 @@ function ProductAdd(props) {
         image_url: values.image,
         price: values.price,
         brandId: values.brand,
-        token: props.token,
+        token: getTokenLocal(),
       });
       setMessage({
         title: "Felicitaciones tu producto fue agregado con exito.",
         text: response.message,
       });
-      props.Products();
+      props.reload();
     } catch (error) {
       setMessage({
         title: error.response.statusText,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Stat, StatNumber } from "@chakra-ui/react";
 
-function PanelButtons({ title, onClick }) {
+function DashboardButton({ title, onClick }) {
   return (
     <Stat
       px={{ base: 4, md: 8 }}
@@ -23,4 +23,4 @@ function PanelButtons({ title, onClick }) {
   );
 }
 
-export default PanelButtons;
+export default DashboardButton;

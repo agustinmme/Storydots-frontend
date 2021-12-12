@@ -18,8 +18,9 @@ import * as Yup from "yup";
 import api from "../../services/api-nodejs";
 import MsgBox from "../../components/message/MsgBox";
 import FieldChakra from "../../components/field/FieldChakra";
+import { setTokenLocal } from "../../../utils/auth";
 
-const Login = ({ passToken }) => {
+const Login = ({setUser}) => {
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
 
@@ -32,7 +33,8 @@ const Login = ({ passToken }) => {
         email: values.email,
         pass: values.pass,
       });
-      passToken(response.token);
+      setTokenLocal(response.token)
+      setUser(true);
     } catch (error) {
       console.log(error);
       setMessage({

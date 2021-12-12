@@ -24,11 +24,11 @@ const addProduct = async ({name,description,image_url,price,brandId,token}) => {
   return data;
 };
 
-const updateProduct = async ({name,description,image_url,price,id,token}) => {
+const updateProduct = async ({name,description,image_url,price,id,token,brandId}) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
-  const { data } = await axios.put(`${baseUrl}/products/${id}`,{name,description,image_url,price},config);
+  const { data } = await axios.put(`${baseUrl}/products/${id}`,{name,description,image_url,price,brandId},config);
   return data;
 };
 
@@ -41,6 +41,7 @@ const deleteProduct = async (id,token) => {
 };
 
 //User
+
 const singUp = async (credentials) => {
   const { data } = await axios.post(`${baseUrl}/users/register`,credentials);
   return data;

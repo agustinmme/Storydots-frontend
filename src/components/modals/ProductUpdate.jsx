@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import FieldChakra from "../field/FieldChakra";
 import SpinnerCustom from "../spinner/Spinner";
+import { getTokenLocal } from "../../../utils/auth";
 
 function ProductUpdate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,8 +29,6 @@ function ProductUpdate(props) {
   const [data, setData] = useState({});
   const [pending, setPending] = useState(true);
   const [message, setMessage] = useState(initialState);
-
-
 
   const open = async () => {
     onOpen();
@@ -57,13 +56,13 @@ function ProductUpdate(props) {
         image_url: values.image,
         price: values.price,
         brandId: values.brand,
-        token: props.token,
+        token: getTokenLocal(),
       });
       setMessage({
         title: "Felicitaciones tu producto fue actulizado.",
         text: response.message,
       });
-      props.Products();
+      props.reload();
     } catch (error) {
       setMessage({
         title: error.response.statusText,

@@ -1,13 +1,19 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
+import { getTokenLocal } from '../../../utils/auth'
 import Login from '../pages/Login'
 import HomeDashboard from './HomeDashboard'
-
 function Dashboard() {
-    const [token, setToken] = useState("")
+    const [user, setUser] = useState(false);
+    useEffect(() => {
+		if (getTokenLocal()) {
+            setUser(true);
+				return;
+            }
+    }, []);
 
     return (
         <>
-            {token===""?<Login passToken={setToken} />:<HomeDashboard token={token}/>}
+            {user?<HomeDashboard />:<Login setUser={setUser}/>}
         </>
     )
 }

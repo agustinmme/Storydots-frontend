@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Box, Spinner, Stack } from "@chakra-ui/react";
 
-function SpinnerCustom() {
+function CustomSpinner() {
   return (
     <Box
       display={"d-flex"}
@@ -24,4 +24,4 @@ function SpinnerCustom() {
   );
 }
 
-export default SpinnerCustom;
+export default CustomSpinner;

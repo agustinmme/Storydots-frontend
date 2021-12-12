@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-export default function Pagination({data,page,prevPage,nextPage}) {
+export default function Pagination({totalPages,page,prevPage,nextPage}) {
 
   return (
     <Flex p={50} w="full" alignItems="center" justifyContent="center">
@@ -25,13 +25,13 @@ export default function Pagination({data,page,prevPage,nextPage}) {
           />
           <Text cursor={"default"} _hover={{color:"secondary.600"}}>{page+1 }</Text>
           <Text cursor={"default"} _hover={{color:"secondary.600"}}>OF</Text>
-          <Text cursor={"default"} _hover={{color:"secondary.600"}} >{data.totalPages || 1}</Text>
+          <Text cursor={"default"} _hover={{color:"secondary.600"}} >{totalPages || 1}</Text>
           <IconButton
             variant="ghost"
             colorScheme="secondary"
             aria-label="Adelante"
             fontSize="20px"
-            disabled={(page+1)>=data.totalPages}
+            disabled={(page+1)>=totalPages}
             icon={<IoIosArrowForward />}
             boxSize={6}
             onClick={nextPage}

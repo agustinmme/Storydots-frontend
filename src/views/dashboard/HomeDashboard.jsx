@@ -1,84 +1,54 @@
 import React, { useState } from "react";
-
 import { Box, chakra, SimpleGrid, Stack } from "@chakra-ui/react";
-import Tablet from "../../components/tablet/Tablet";
+import { isEmpty } from "../../../utils/utils";
+import { Outlet, useNavigate } from "react-router-dom";
+import TabletProducts from "../../components/tablets/TabletProducts";
 import Pagination from "../../components/pagination/Pagination";
 import api from "../../services/api-nodejs";
-import SpinnerCustom from "../../components/spinner/Spinner";
-import PanelButtons from "../../components/button/PanelButtons";
-import { isEmpty } from "../../../utils/utils";
+import CustomSpinner from "../../components/spinner/Spinner";
+import DashboardButton from "../../components/button/DashboardButton";
 
-function HomeDashboard({ token }) {
+function HomeDashboard() {
   const [data, setData] = useState({});
   const [pending, setPending] = useState(true);
   const [page, setPage] = useState(0);
-  
-  const Products = async () => {
-    try {
-      setPending(true);
-      const response = await api.getPageProduct(page);
-      setData(response);
-      setPending(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  let navigate = useNavigate();
 
-  const prevPage = async () => {
-    try {
-      setPending(true);
-      const response = await api.getPageProduct(page - 1);
-      setPage(page - 1);
-      setData(response);
-      setPending(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const nextPage = async () => {
-    try {
-      setPending(true);
-      const response = await api.getPageProduct(page + 1);
-      setPage(page + 1);
-      setData(response);
-      setPending(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <Box maxW="6xl" mx={"auto"} p={5} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1
         textAlign={"center"}
         fontSize={"4xl"}
-        py={10}
+        py={5}
         fontWeight={"bold"}
       >
         Bienvenido al Panel de Control
       </chakra.h1>
+      <Box
+        display={"d-flex"}
+        justifyContent={"center"}
+        alignContent={"center"}
+        mb={7}
+      >
+        <Box w={"50%"} bgColor={"primary.500"} h={{ base: 1, md: 2 }} />
+      </Box>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, lg: 8 }}>
-        <PanelButtons
+        <DashboardButton
           title={"Productos"}
-          onClick={Products}
-          isActive={data.name}
+          onClick={() => {
+            navigate("/dashboard/products");
+          }}
         />
-        <PanelButtons title={"Marcas"} />
+        <DashboardButton
+          title={"Marcas"}
+          onClick={() => {
+            navigate("/dashboard/chau");
+          }}
+        />
       </SimpleGrid>
-      {isEmpty(data) ? null : pending ? (
-        <SpinnerCustom />
-      ) : (
-        <Stack>
-          <Tablet data={data.content} token={token} Products={Products}/>
-          <Pagination
-            data={data}
-            page={page}
-            prevPage={prevPage}
-            nextPage={nextPage}
-          />
-        </Stack>
-      )}
+
+      <Outlet />
     </Box>
   );
 }

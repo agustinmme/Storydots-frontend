@@ -14,6 +14,7 @@ import {
   Box,
   chakra
 } from "@chakra-ui/react";
+import { getTokenLocal } from "../../../utils/auth";
 
 function ProductDelete(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,12 +28,12 @@ function ProductDelete(props) {
 
   const onDelete = async () => {
     try {
-      const response = await api.deleteProduct(props.id, props.token);
+      const response = await api.deleteProduct(props.id, getTokenLocal());
       setMessage({
         title: "Felicitaciones tu producto fue eliminado.",
         text: response.message,
       });
-      props.Products();
+      props.reload();
     } catch (error) {
       setMessage({
         title: error.response.statusText,
