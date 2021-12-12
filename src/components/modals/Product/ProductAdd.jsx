@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import RippledButton from "../button/RippledButton";
-import api from "../../services/api-nodejs";
-import MsgBox from "../message/MsgBox";
-import SpinnerCustom from "../spinner/Spinner";
+import RippledButton from "../../button/RippledButton";
+import api from "../../../services/api-nodejs";
+import MsgBox from "../../message/MsgBox";
+import SpinnerCustom from "../../spinner/Spinner";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import {
@@ -20,8 +20,8 @@ import {
   Textarea,
   Input,
 } from "@chakra-ui/react";
-import FieldChakra from "../field/FieldChakra";
-import { getTokenLocal } from "../../../utils/auth";
+import FieldChakra from "../../field/FieldChakra";
+import { getTokenLocal } from "../../../../utils/auth";
 
 function ProductAdd(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();

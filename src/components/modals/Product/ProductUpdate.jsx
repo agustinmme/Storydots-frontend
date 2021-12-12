@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-import RippledButton from "../button/RippledButton";
-import api from "../../services/api-nodejs";
-import MsgBox from "../message/MsgBox";
+import RippledButton from "../../button/RippledButton";
+import api from "../../../services/api-nodejs";
+import MsgBox from "../../message/MsgBox";
 import { Formik } from "formik";
 import {
   Modal,
@@ -19,22 +19,22 @@ import {
   Textarea,
   Input,
 } from "@chakra-ui/react";
-import FieldChakra from "../field/FieldChakra";
-import SpinnerCustom from "../spinner/Spinner";
-import { getTokenLocal } from "../../../utils/auth";
+import FieldChakra from "../../field/FieldChakra";
+import SpinnerCustom from "../../spinner/Spinner";
+import { getTokenLocal } from "../../../../utils/auth";
 
 function ProductUpdate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialState = { title: "", text: "" };
-  const [data, setData] = useState({});
+  const [brands, setBrands] = useState({});
   const [pending, setPending] = useState(true);
   const [message, setMessage] = useState(initialState);
 
   const open = async () => {
     onOpen();
     try {
-      const response = await api.getAllBrands();
-        setData(response);
+      const response = await api.getNoPageBrand();
+      setBrands(response);
         setPending(false);
     } catch (error) {
       console.log(error);
@@ -162,7 +162,7 @@ function ProductUpdate(props) {
                       name="brand"
                       mt={3}
                     >
-                      {data.content.map((brand) => {
+                      {brands.content.map((brand) => {
                         return (
                           <option key={brand.id} value={brand.id}>
                             {brand.name}

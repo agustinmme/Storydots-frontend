@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import RippledButton from "../button/RippledButton";
-import api from "../../services/api-nodejs";
-import MsgBox from "../message/MsgBox";
+import RippledButton from "../../button/RippledButton";
+import api from "../../../services/api-nodejs";
+import MsgBox from "../../message/MsgBox";
+import { getTokenLocal } from "../../../../utils/auth";
 import {
   Modal,
   ModalOverlay,
@@ -14,7 +15,7 @@ import {
   Box,
   chakra
 } from "@chakra-ui/react";
-import { getTokenLocal } from "../../../utils/auth";
+
 
 function ProductDelete(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();

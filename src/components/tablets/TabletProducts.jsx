@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import ProductModal from "../modals/ProductModal";
-import ProductUpdate from "../modals/ProductUpdate";
-import ProductDelete from "../modals/ProductDelete";
-import ProductAdd from "../modals/ProductAdd";
-import { chakra, Flex, Text, Stack, SimpleGrid } from "@chakra-ui/react";
+import ProductAdd from "../modals/Product/ProductAdd";
+import { Flex, Stack } from "@chakra-ui/react";
 import CustomSpinner from "../spinner/Spinner";
 import Pagination from "../pagination/Pagination";
 import api from "../../services/api-nodejs";
+import Product from "./Product";
 
-export default function Tabletproducts() {
+export default function TabletProducts() {
   const [data, setData] = useState({});
   const [pending, setPending] = useState(true);
   const [page, setPage] = useState(0);
+
   useEffect(() => {
     const products = async () => {
       try {
@@ -71,56 +70,16 @@ export default function Tabletproducts() {
           ) : (
             data.content.map((product) => {
               return (
-                <Flex
-                  direction={{ base: "row", md: "column" }}
-                  bg={"white"}
+                <Product
                   key={product.id}
-                  border={"1px solid"}
-                  _hover={{ color: "primary.400", bg: "secondary.50" }}
-                >
-                  <SimpleGrid
-                    spacingY={5}
-                    columns={{ base: 1, md: 3 }}
-                    w="full"
-                    py={3}
-                    px={10}
-                    fontWeight="hairline"
-                    mt={2}
-                  >
-                    <Text pr={1}>{product.name}</Text>
-                    <chakra.span
-                      textOverflow="ellipsis"
-                      overflow="hidden"
-                      whiteSpace="nowrap"
-                    >
-                      {product.brand.name}
-                    </chakra.span>
-                    <Flex justify={{ md: "end" }}>
-                      <ProductModal
-                        name={product.name}
-                        description={product.description}
-                        img={product.image_url}
-                        price={product.price}
-                        brand={product.brand}
-                        text={"VER"}
-                      />
-                      <ProductUpdate
-                        name={product.name}
-                        description={product.description}
-                        image={product.image_url}
-                        price={product.price}
-                        id={product.id}
-                        brand={product.brand.id}
-                        reload={reloadData}
-                      />
-                      <ProductDelete
-                        name={product.name}
-                        id={product.id}
-                        reload={reloadData}
-                      />
-                    </Flex>
-                  </SimpleGrid>
-                </Flex>
+                  id={product.id}
+                  name={product.name}
+                  description={product.description}
+                  image={product.image_url}
+                  price={product.price}
+                  brand={product.brand}
+                  reload={reloadData}
+                />
               );
             })
           )}

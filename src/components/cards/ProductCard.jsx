@@ -1,5 +1,5 @@
 import React from "react";
-import ProductModal from "../modals/ProductModal";
+import ProductModal from "../modals/Product/ProductModal";
 import { chakra, Box, Image, Flex, Tooltip } from "@chakra-ui/react";
 
 export default function ProductCard({ name, description, img, price, brand }) {

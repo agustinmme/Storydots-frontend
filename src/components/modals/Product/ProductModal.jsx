@@ -1,5 +1,5 @@
 import React from "react";
-import RippledButton from "../button/RippledButton";
+import RippledButton from "../../button/RippledButton";
 import {
   Modal,
   ModalOverlay,
