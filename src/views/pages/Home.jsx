@@ -99,7 +99,7 @@ function App() {
         </SimpleGrid>
         {isEmpty(data) ? null : (
           <Pagination
-            data={data}
+          totalPages={data.totalPages}
             page={page}
             prevPage={prevPage}
             nextPage={nextPage}
