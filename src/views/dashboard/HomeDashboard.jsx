@@ -43,7 +43,7 @@ function HomeDashboard() {
         <DashboardButton
           title={"Marcas"}
           onClick={() => {
-            navigate("/dashboard/chau");
+            navigate("/dashboard/brands");
           }}
         />
       </SimpleGrid>
