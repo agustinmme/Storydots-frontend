@@ -12,10 +12,10 @@ export default function TabletProducts() {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    let monted = true;
+    let isSubscribed  = true;
     const products = async () => {
       try {
-        if(monted){
+        if(isSubscribed){
           setPending(true);
           const response = await api.getPageProduct(page);
           setData(response);
@@ -27,7 +27,7 @@ export default function TabletProducts() {
     };
     products();
     return () => {
-      monted = false;
+      isSubscribed = false;
     }
   }, []);
 
