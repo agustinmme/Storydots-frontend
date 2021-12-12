@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import * as Yup from "yup";
 import RippledButton from "../../button/RippledButton";
 import api from "../../../services/api-nodejs";
 import MsgBox from "../../message/MsgBox";
+import * as Yup from "yup";
 import { Formik } from "formik";
 import {
   Modal,
@@ -26,6 +26,7 @@ function BrandUpdate(props) {
   const [message, setMessage] = useState(initialState);
 
 
+
   const close = () => {
     setMessage(initialState);
     onClose();
@@ -34,17 +35,18 @@ function BrandUpdate(props) {
   const onSubmit = async (values) => {
     try {
       const response = await api.updateBrand({
-        id: props.id,
+        id:props.id,
         name: values.name,
         logo_url: values.logo,
         token: getTokenLocal(),
       });
       setMessage({
-        title: "Felicitaciones tu producto fue actulizado.",
+        title: "Felicitaciones tu marca fue creada con exito.",
         text: response.message,
       });
       props.reload();
     } catch (error) {
+        console.log(error)
       setMessage({
         title: error.response.statusText,
         text: error.response.data.message,
@@ -60,7 +62,6 @@ function BrandUpdate(props) {
     name: Yup.string().required("El nombre no puede ser vacio"),
     logo: Yup.string().required("La imagen del logo no puede ser vacia "),
   });
-  
 
   return (
     <>
@@ -80,7 +81,7 @@ function BrandUpdate(props) {
       <Modal isOpen={isOpen} onClose={close} isCentered>
         <ModalOverlay />
         <ModalContent>
-          {message.title !== "" ? (
+          { message.title !== "" ? (
             <MsgBox title={message.title} text={message.text} close={close} />
           ) : (
             <ModalBody>
@@ -106,7 +107,7 @@ function BrandUpdate(props) {
                       name="name"
                       label={"Nombre"}
                       chakraComp={Input}
-                      placeholder="BAGUETTES"
+                      placeholder="LICHI"
                       type="text"
                     />
                     <FieldChakra
@@ -116,6 +117,7 @@ function BrandUpdate(props) {
                       placeholder="https://d3ugyf2ht6aenh.cloudfront.net/stores/771/622/products/lachi-junio-y-julio-8144_1-d38011a323fa47c30516237120310019-1024-1024.jpg"
                       type="text"
                     />
+
                     <Flex justifyContent="space-between">
                       <Button
                         isLoading={isSubmitting}

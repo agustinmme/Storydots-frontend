@@ -29,6 +29,7 @@ function Brand({ id, name, image, reload }) {
             image={image}
             text={"VER"}
           />
+          <BrandUpdate id={id} name={name} image={image} reload={reload} />
           <BrandDelete id={id} name={name} reload={reload} />
         </Flex>
       </SimpleGrid>
