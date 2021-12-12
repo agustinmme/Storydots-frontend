@@ -54,11 +54,15 @@ const singIn = async (credentials) => {
 
 //Brands
 
-const getAllBrands = async () => {
+const getPageBrand = async () => {
   const { data } = await axios.get(`${baseUrl}/brands`);
   return data;
 };
 
+const getNoPageBrand = async () => {
+  const { data } = await axios.get(`${baseUrl}/brands/no-pages`);
+  return data;
+};
 
 const getBrand = async (id) => {
   const { data } = await axios.get(`${baseUrl}/brands/${id}`);
@@ -88,5 +92,6 @@ export default {
   deleteProduct,
   singUp,
   singIn,
-  getAllBrands
+  getPageBrand,
+  getNoPageBrand
 };
