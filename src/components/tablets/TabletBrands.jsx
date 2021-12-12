@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ProductAdd from "../modals/Product/ProductAdd";
 import { Flex, Stack } from "@chakra-ui/react";
 import CustomSpinner from "../spinner/Spinner";
 import Pagination from "../pagination/Pagination";
 import api from "../../services/api-nodejs";
 import Brand from "./Brand";
+import BrandAdd from "../modals/Brand/BrandAdd";
 
 export default function TabletBrands() {
   const [data, setData] = useState({});
@@ -52,7 +52,7 @@ export default function TabletBrands() {
   const reloadData = async () => {
     try {
       setPending(true);
-      const response = await api.getPageProduct(page);
+      const response = await api.getPageBrand(page);
       setData(response);
       setPending(false);
     } catch (error) {
@@ -62,7 +62,7 @@ export default function TabletBrands() {
 
   return (
     <Stack mt={10}>
-      {!pending ? <ProductAdd reload={reloadData} /> : null}
+      {!pending ? <BrandAdd reload={reloadData} /> : null}
       <Flex w="full" alignItems="center" justifyContent="center">
         <Stack direction={{ base: "column" }} w="full" spacing={5}>
           {pending ? (

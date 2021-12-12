@@ -2,6 +2,7 @@ import React from "react";
 import { Flex, Text, SimpleGrid } from "@chakra-ui/react";
 import BrandModal from "../modals/Brand/BrandModal";
 
+
 function Brand({ id,name, image,reload}) {
   return (
     <Flex
@@ -27,6 +28,7 @@ function Brand({ id,name, image,reload}) {
             image={image}
             text={"VER"}
           />
+
         </Flex>
       </SimpleGrid>
     </Flex>

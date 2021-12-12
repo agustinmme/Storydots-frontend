@@ -69,8 +69,11 @@ const getBrand = async (id) => {
   return data;
 };
 
-const addBrand = async (name,logo_url) => {
-  const { data } = await axios.post(`${baseUrl}/brands/new`);
+const addBrand = async ({name,logo_url,token}) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  const { data } = await axios.post(`${baseUrl}/brands/new`,{name,logo_url},config);
   return data;
 };
 
@@ -93,5 +96,7 @@ export default {
   singUp,
   singIn,
   getPageBrand,
-  getNoPageBrand
+  getNoPageBrand,
+  getBrand,
+  addBrand,
 };
