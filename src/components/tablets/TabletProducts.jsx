@@ -12,17 +12,23 @@ export default function TabletProducts() {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
+    let monted = true;
     const products = async () => {
       try {
-        setPending(true);
-        const response = await api.getPageProduct(page);
-        setData(response);
-        setPending(false);
+        if(monted){
+          setPending(true);
+          const response = await api.getPageProduct(page);
+          setData(response);
+          setPending(false);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     products();
+    return () => {
+      monted = false;
+    }
   }, []);
 
   const prevPage = async () => {

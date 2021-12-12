@@ -12,17 +12,23 @@ export default function TabletBrands() {
   const [page, setPage] = useState(0);
   
   useEffect(() => {
+    let monted = true;
     const brands = async () => {
       try {
-        setPending(true);
-        const response = await api.getPageBrand(page);
-        setData(response);
-        setPending(false);
+        if(monted){
+          setPending(true);
+          const response = await api.getPageBrand(page);
+          setData(response);
+          setPending(false);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     brands();
+    return () => {
+      monted = false;
+    }
   }, []);
 
   const prevPage = async () => {
