@@ -54,8 +54,8 @@ const singIn = async (credentials) => {
 
 //Brands
 
-const getPageBrand = async () => {
-  const { data } = await axios.get(`${baseUrl}/brands`);
+const getPageBrand = async (page) => {
+  const { data } = await axios.get(`${baseUrl}/brands/?page=${page}`);
   return data;
 };
 
@@ -82,8 +82,11 @@ const updateBrand = async (name,description,image_url,price,brandId) => {
   return data;
 };
 
-const deleteBrand = async (id) => {
-  const { data } = await axios.delete(`${baseUrl}/brands/id`);
+const deleteBrand = async (id,token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  const { data } = await axios.delete(`${baseUrl}/brands/${id}`,config);
   return data;
 };
 
@@ -99,4 +102,5 @@ export default {
   getNoPageBrand,
   getBrand,
   addBrand,
+  deleteBrand,
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Text, SimpleGrid } from "@chakra-ui/react";
 import BrandModal from "../modals/Brand/BrandModal";
-
+import BrandDelete from "../modals/Brand/BrandDelete";
 
 function Brand({ id,name, image,reload}) {
   return (
@@ -28,7 +28,11 @@ function Brand({ id,name, image,reload}) {
             image={image}
             text={"VER"}
           />
-
+            <BrandDelete
+              name={name}
+              id={id}
+              reload={reload}
+            />
         </Flex>
       </SimpleGrid>
     </Flex>
