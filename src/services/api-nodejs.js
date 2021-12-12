@@ -77,8 +77,11 @@ const addBrand = async ({name,logo_url,token}) => {
   return data;
 };
 
-const updateBrand = async (name,description,image_url,price,brandId) => {
-  const { data } = await axios.put(`${baseUrl}/brands/new`);
+const updateBrand = async ({id,name,logo_url,token}) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  const { data } = await axios.put(`${baseUrl}/brands/${id}`,{name,logo_url},config);
   return data;
 };
 
@@ -102,5 +105,6 @@ export default {
   getNoPageBrand,
   getBrand,
   addBrand,
+  updateBrand,
   deleteBrand,
 };

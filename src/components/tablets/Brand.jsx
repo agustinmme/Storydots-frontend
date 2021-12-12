@@ -2,8 +2,9 @@ import React from "react";
 import { Flex, Text, SimpleGrid } from "@chakra-ui/react";
 import BrandModal from "../modals/Brand/BrandModal";
 import BrandDelete from "../modals/Brand/BrandDelete";
+import BrandUpdate from "../modals/Brand/BrandUpdate";
 
-function Brand({ id,name, image,reload}) {
+function Brand({ id, name, image, reload }) {
   return (
     <Flex
       direction={{ base: "row", md: "column" }}
@@ -28,11 +29,8 @@ function Brand({ id,name, image,reload}) {
             image={image}
             text={"VER"}
           />
-            <BrandDelete
-              name={name}
-              id={id}
-              reload={reload}
-            />
+          <BrandUpdate id={id} name={name} image={image} reload={reload}/>
+          <BrandDelete id={id} name={name}  reload={reload} />
         </Flex>
       </SimpleGrid>
     </Flex>
