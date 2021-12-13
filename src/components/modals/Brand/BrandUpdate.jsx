@@ -18,14 +18,14 @@ import {
   Input,
 } from "@chakra-ui/react";
 import FieldChakra from "../../field/FieldChakra";
-import { getTokenLocal } from "../../../../utils/auth";
+import { deleteTokenLocal, getTokenLocal } from "../../../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 function BrandUpdate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
-
-
+  const navigate = useNavigate();
 
   const close = () => {
     setMessage(initialState);
@@ -35,7 +35,7 @@ function BrandUpdate(props) {
   const onSubmit = async (values) => {
     try {
       const response = await api.updateBrand({
-        id:props.id,
+        id: props.id,
         name: values.name,
         logo_url: values.logo,
         token: getTokenLocal(),
@@ -46,11 +46,17 @@ function BrandUpdate(props) {
       });
       props.reload();
     } catch (error) {
-        console.log(error)
       setMessage({
         title: error.response.statusText,
         text: error.response.data.message,
       });
+      if (error.response.status === 401) {
+        setTimeout(() => {
+          onClose();
+          deleteTokenLocal();
+          navigate("/");
+        }, 2000);
+      }
     }
   };
 
@@ -81,7 +87,7 @@ function BrandUpdate(props) {
       <Modal isOpen={isOpen} onClose={close} isCentered>
         <ModalOverlay />
         <ModalContent>
-          { message.title !== "" ? (
+          {message.title !== "" ? (
             <MsgBox title={message.title} text={message.text} close={close} />
           ) : (
             <ModalBody>

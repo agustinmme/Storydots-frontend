@@ -18,13 +18,14 @@ import {
   Input,
 } from "@chakra-ui/react";
 import FieldChakra from "../../field/FieldChakra";
-import { getTokenLocal } from "../../../../utils/auth";
+import { deleteTokenLocal, getTokenLocal } from "../../../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 function BrandAdd(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
-
+  const navigate = useNavigate();
 
 
   const close = () => {
@@ -50,6 +51,13 @@ function BrandAdd(props) {
         title: error.response.statusText,
         text: error.response.data.message,
       });
+      if (error.response.status === 401) {
+        setTimeout(() => {
+          onClose();
+          deleteTokenLocal();
+          navigate("/");
+        }, 2000);
+      }
     }
   };
 

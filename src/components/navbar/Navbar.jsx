@@ -18,10 +18,15 @@ import {
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { deleteTokenLocal } from "../../../utils/auth";
 
-export default function Navbar() {
+export default function Navbar({ login = false }) {
   const mobileNav = useDisclosure();
   const navigate = useNavigate();
+  const logout = ()=>{
+    deleteTokenLocal();
+    navigate("/");
+  }
   return (
     <React.Fragment>
       <chakra.header
@@ -55,13 +60,13 @@ export default function Navbar() {
           </Flex>
           <HStack display="flex" alignItems="center" spacing={1}>
             <HStack
-              spacing={1}
+              spacing={5}
               mr={1}
               color="brand.500"
               display={{ base: "none", md: "inline-flex" }}
             >
-              <RippledButton bgColor={"transparent"}>HOME</RippledButton>
-              <RippledButton
+              <RippledButton bgColor={"transparent"} onClick={()=>{navigate("/")}}>HOME</RippledButton>
+              {login ?null:<RippledButton
                 rightIcon={<IoMdArrowRoundForward />}
                 border={"1px solid"}
                 scheme={"secondary"}
@@ -75,8 +80,23 @@ export default function Navbar() {
                 }}
               >
                 DASHBOARD
-              </RippledButton>
-              <RegisterModal />
+              </RippledButton>}
+              {login ? (
+                <RippledButton
+                scheme={"gray"}
+                shadow={"base"}
+                textColor="primary.600"
+                step1={"50"}
+                step2={"200"}
+                step3={"300"}
+                size={"md"}
+                onClick={logout}
+                >
+                  SALIR
+                </RippledButton>
+              ) : (
+                <RegisterModal />
+              )}
             </HStack>
 
             <Box display={{ base: "inline-flex", md: "none" }}>
@@ -131,7 +151,22 @@ export default function Navbar() {
                   DASHBOARD
                 </RippledButton>
 
-                <RegisterModal />
+                {login ? (
+                  <RippledButton
+                  scheme={"gray"}
+                  shadow={"base"}
+                  textColor="primary.600"
+                  step1={"50"}
+                  step2={"200"}
+                  step3={"300"}
+                  size={"md"}
+                  onClick={logout}
+                  >
+                    SALIR
+                  </RippledButton>
+                ) : (
+                  <RegisterModal />
+                )}
               </VStack>
             </Box>
           </HStack>

@@ -21,7 +21,8 @@ import {
 } from "@chakra-ui/react";
 import FieldChakra from "../../field/FieldChakra";
 import SpinnerCustom from "../../spinner/Spinner";
-import { getTokenLocal } from "../../../../utils/auth";
+import { deleteTokenLocal, getTokenLocal } from "../../../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 function ProductUpdate(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,7 +30,8 @@ function ProductUpdate(props) {
   const [brands, setBrands] = useState({});
   const [pending, setPending] = useState(true);
   const [message, setMessage] = useState(initialState);
-
+  const navigate = useNavigate();
+  
   const open = async () => {
     onOpen();
     try {
@@ -68,6 +70,13 @@ function ProductUpdate(props) {
         title: error.response.statusText,
         text: error.response.data.message,
       });
+      if (error.response.status === 401) {
+        setTimeout(() => {
+          onClose();
+          deleteTokenLocal();
+          navigate("/");
+        }, 2000);
+      }
     }
   };
 

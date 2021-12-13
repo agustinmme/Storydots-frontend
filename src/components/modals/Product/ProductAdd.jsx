@@ -21,7 +21,8 @@ import {
   Input,
 } from "@chakra-ui/react";
 import FieldChakra from "../../field/FieldChakra";
-import { getTokenLocal } from "../../../../utils/auth";
+import { deleteTokenLocal, getTokenLocal } from "../../../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 function ProductAdd(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,7 +30,7 @@ function ProductAdd(props) {
   const [message, setMessage] = useState(initialState);
   const [data, setData] = useState({});
   const [pending, setPending] = useState(true);
-
+  const navigate = useNavigate();
 
   const open = async () => {
     onOpen();
@@ -69,6 +70,13 @@ function ProductAdd(props) {
         title: error.response.statusText,
         text: error.response.data.message,
       });
+      if (error.response.status === 401) {
+        setTimeout(() => {
+          onClose();
+          deleteTokenLocal();
+          navigate("/");
+        }, 2000);
+      }
     }
   };
 

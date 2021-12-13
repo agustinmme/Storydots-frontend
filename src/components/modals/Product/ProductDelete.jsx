@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import RippledButton from "../../button/RippledButton";
 import api from "../../../services/api-nodejs";
 import MsgBox from "../../message/MsgBox";
-import { getTokenLocal } from "../../../../utils/auth";
+import { deleteTokenLocal, getTokenLocal } from "../../../../utils/auth";
 import {
   Modal,
   ModalOverlay,
@@ -15,12 +15,14 @@ import {
   Box,
   chakra
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 
 function ProductDelete(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
+  const navigate = useNavigate();
 
   const close = () => {
     setMessage(initialState);
@@ -40,6 +42,13 @@ function ProductDelete(props) {
         title: error.response.statusText,
         text: error.response.data.message,
       });
+      if (error.response.status === 401) {
+        setTimeout(() => {
+          onClose();
+          deleteTokenLocal();
+          navigate("/");
+        }, 2000);
+      }
     }
   };
 
