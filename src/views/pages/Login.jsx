@@ -19,11 +19,12 @@ import api from "../../services/api-nodejs";
 import MsgBox from "../../components/message/MsgBox";
 import FieldChakra from "../../components/field/FieldChakra";
 import { setTokenLocal } from "../../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({setUser}) => {
   const initialState = { title: "", text: "" };
   const [message, setMessage] = useState(initialState);
-
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -139,6 +140,15 @@ const Login = ({setUser}) => {
                   type="sumbit"
                 >
                   Iniciar sesión
+                </Button>
+                <Button
+                  colorScheme="primary"
+                  variant={"ghost"}
+                  w={"100%"}
+                  mt={5}
+                  onClick={()=>{navigate("/")}}
+                >
+                  Volver a Inicio
                 </Button>
               </Box>
             )}

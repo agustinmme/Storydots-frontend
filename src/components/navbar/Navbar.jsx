@@ -141,7 +141,7 @@ export default function Navbar({ login = false }) {
                   HOME
                 </RippledButton>
 
-                <RippledButton
+                {login ? null:<RippledButton
                   bgColor={"transparent"}
                   onClick={() => {
                     navigate("/dashboard");
@@ -149,7 +149,7 @@ export default function Navbar({ login = false }) {
                   w={"full"}
                 >
                   DASHBOARD
-                </RippledButton>
+                </RippledButton>}
 
                 {login ? (
                   <RippledButton
