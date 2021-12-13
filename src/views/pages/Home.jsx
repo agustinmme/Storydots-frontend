@@ -16,16 +16,22 @@ function App() {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
+    let isSubscribed  = true;
     const fetch = async () => {
       try {
-        const response = await api.getPageProduct(page);
-        setData(response);
-        setPending(false);
+        if(isSubscribed){
+          const response = await api.getPageProduct(page);
+          setData(response);
+          setPending(false);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     fetch();
+    return () => {
+      isSubscribed = false;
+    }
   }, []);
 
   const prevPage = async () => {

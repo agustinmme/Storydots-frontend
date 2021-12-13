@@ -1,17 +1,10 @@
-import React, { useState } from "react";
-import { Box, chakra, SimpleGrid, Stack } from "@chakra-ui/react";
-import { isEmpty } from "../../../utils/utils";
+import React from "react";
+import { Box, chakra, SimpleGrid } from "@chakra-ui/react";
 import { Outlet, useNavigate } from "react-router-dom";
-import TabletProducts from "../../components/tablets/TabletProducts";
-import Pagination from "../../components/pagination/Pagination";
-import api from "../../services/api-nodejs";
-import CustomSpinner from "../../components/spinner/Spinner";
 import DashboardButton from "../../components/button/DashboardButton";
 
 function HomeDashboard() {
-  const [data, setData] = useState({});
-  const [pending, setPending] = useState(true);
-  const [page, setPage] = useState(0);
+
   let navigate = useNavigate();
 
 
