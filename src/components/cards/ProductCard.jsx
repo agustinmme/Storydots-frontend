@@ -1,6 +1,7 @@
 import React from "react";
 import ProductModal from "../modals/Product/ProductModal";
 import { chakra, Box, Image, Flex, Tooltip } from "@chakra-ui/react";
+import { paserCurrency } from "../../../utils/utils";
 
 export default function ProductCard({ name, description, img, price, brand }) {
   return (
@@ -66,7 +67,7 @@ export default function ProductCard({ name, description, img, price, brand }) {
               color={"gray.700"}
               mt={3}
             >
-              $ {price}
+              {paserCurrency(price)}
             </chakra.p>
           </Flex>
 
