@@ -92,7 +92,7 @@ function ProductAdd(props) {
     description: Yup.string().required("La descripcion no puede estar vacia"),
     image: Yup.string().required("La imagen no puede ser vacia "),
     price: Yup.number().required("El precio no puede ser vacio"),
-    brand: Yup.number().required("Falta seleccionar una marca"),
+    brand: Yup.number().required().min(1,"Falta seleccionar una marca"),
   });
 
   return (

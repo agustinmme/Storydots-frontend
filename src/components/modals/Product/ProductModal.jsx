@@ -18,6 +18,7 @@ import {
   Text,
   Link,
 } from "@chakra-ui/react";
+import { paserCurrency } from "../../../../utils/utils";
 
 
 function ProductModal({
@@ -99,7 +100,7 @@ function ProductModal({
                 color={"gray.700"}
                 mt={3}
               >
-                $ {price}
+                {paserCurrency(price)}
               </chakra.p>
             </Flex>
 
